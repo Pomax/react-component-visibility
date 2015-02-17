@@ -54,4 +54,4 @@ I think you forgot something
 
 I very well might have! Hit up the [issue tracker](https://github.com/Pomax/react-component-visibility/issues) and we can discuss that.
 
-- [Pomax](http://twitter.com/TheRealPomax)
+-- [Pomax](http://twitter.com/TheRealPomax)
