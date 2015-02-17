@@ -101,9 +101,11 @@
      * static assets on first-time-in-view-ness (that's a word, right?).
      */
     disableVisbilityHandling: function() {
-      document.removeEventListener("scroll", this._rcv_fn);
-      window.removeEventListener("resize", this._rcv_fn);
-      this._rcv_fn = false;
+      if (this._rcv_fn) {
+        document.removeEventListener("scroll", this._rcv_fn);
+        window.removeEventListener("resize", this._rcv_fn);
+        this._rcv_fn = false;
+      }
     }
   };
 
