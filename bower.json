@@ -1,0 +1,29 @@
+{
+  "name": "react-component-visibility",
+  "main": "index.js",
+  "version": "0.0.2",
+  "homepage": "https://github.com/Pomax/react-component-visibility",
+  "authors": [
+    "Pomax <pomax@nihongoresources.com>"
+  ],
+  "description": "A mixin for determining whether a component is visible to the user or not.",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "React",
+    "visible",
+    "visibility",
+    "mixin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
