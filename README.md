@@ -11,12 +11,12 @@ and window resizing. However, because some times you only need "trigger once,
 then stop listening", there are two functions you can call to optimize the
 event handling:
 
-- enableVisbilityHandling([checkNow])
+- `enableVisbilityHandling([checkNow])`
 
   Call as `this.enableVisbilityHandling()`, with an optional `true` as argument
   to both enable visibiilty handling and immediately do a visibiity check.
 
-- disableVisbilityHandling
+- `disableVisbilityHandling()`
 
   Call as `this.disableVisbilityHandling()` to turn off event listening for
   this component.
