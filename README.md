@@ -27,29 +27,41 @@ and window resizing. However, because some times you only need "trigger once,
 then stop listening", there are two functions you can call to optimize the
 event handling:
 
-- `enableVisbilityHandling([checkNow])`
+- `enableVisbilityHandling([checkNow])` (built in)
 
   Call as `this.enableVisbilityHandling()`, with an optional `true` as argument
   to both enable visibiilty handling and immediately do a visibiity check.
 
-- `disableVisbilityHandling()`
+- `disableVisbilityHandling()` (built in)
 
   Call as `this.disableVisbilityHandling()` to turn off event listening for
   this component.
 
 - `componentVisibilityChanged()` (optional)
 
-  This function, if found, gets called automatically after binding a visibility
-  change in the component's state, so that you can trigger custom logic. No
-  argument comes into this function, since the `this.state.visible` value will
-  already reflect the currect value, and the old value was simply `!visible`.
+  This function, if you add it to your component yourself, gets called
+  automatically after binding a visibility change in the component's state,
+  so that you can trigger custom logic. No argument comes into this function,
+  since the `this.state.visible` value will already reflect the currect value,
+  and the old value was simply `!visible`.
 
 ### Rate limiting the scroll handling
 
 By default, the mixin does rate limiting to prevent event saturation (onscroll
 refires very fast), set such that when a scroll event is handled, it won't
 listen for and act on new events until 25 milliseconds later. You can change
-the delay by calling `setComponentVisbilityRateLimit(ms)`.
+the delay by calling the rate limit function with the number of milliseconds
+you want the interval to be instead:
+
+```
+...
+componentDidMount: function() {
+  ...
+  this.setComponentVisbilityRateLimit(ms);
+  ...
+},
+...
+```
 
 ## An example
 
