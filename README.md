@@ -1,7 +1,6 @@
-react-component-visibility
-===
+# react-component-visibility
 
-A mixin for determining whether a component is visible to the user or not.
+## A mixin for determining whether a component is visible to the user or not.
 
 This mixin is for running React components in the browser (it has a hard
 dependency on `window` and `document`), listening to `scroll` and `resize`
@@ -18,8 +17,8 @@ visible (based on scroll or resizing), `render()`, and subsequent
 
 Nice and easy.
 
-This mixin has a stupidly simple API
----
+## This mixin has a stupidly simple API
+
 
 The mixin takes care of registering and dropping event listeners for scroll
 and window resizing. However, because some times you only need "trigger once,
@@ -36,10 +35,84 @@ event handling:
   Call as `this.disableVisbilityHandling()` to turn off event listening for
   this component.
 
-That's it.
+By default, the mixin does rate limiting to prevent event saturation (onscroll
+refires very fast), set such that when a scroll event is handled, it won't
+listen for and act on new events until 25 milliseconds later. You can change
+the delay by calling `setComponentVisbilityRateLimit(ms)`.
 
-How to install
----
+## An example
+
+Using the mixin is pretty straight forward.
+
+### In the browser:
+
+```
+<script src="react-component-visbility/index.js"></script>
+...
+<script type="text/jsx">
+var MyComponent = React.createClass({
+  ...
+  mixins = [
+    // required:
+    ComponentVisibilityMixin
+  ];
+  ...
+  // optional:
+  componentVisibilityChanged: function() {
+    var visible = this.state.visible;
+    ...
+  },
+  ...
+});
+</script>
+```
+
+### In the browser, AMD style:
+
+Bind `react-component-visbility/index.js` in your require config,
+and then simply require it in like everything else:
+
+```
+define(
+  ['React', 'ComponentVisibilityMixin'],
+
+  function(R, CVM) {
+    var MyComponent = R.createClass({
+      ...
+      mixins = [ CVM ];
+      ...
+      componentVisibilityChanged: function() {
+        var visible = this.state.visible;
+        ...
+      },
+      ...
+    });
+  }
+);
+```
+
+### In node.js
+
+Like every other node package:
+
+```
+var React = require("react");
+var CVM = require("react-component-visibility");
+var MyComponent = React.createClass({
+  ...
+  mixins = [ CVM ];
+  ...
+  componentVisibilityChanged: function() {
+    var visible = this.state.visible;
+    ...
+  },
+  ...
+});
+
+module.exports = MyComponent;
+```
+
+## How to install
 
 Simply use `npm`:
 
@@ -49,8 +122,7 @@ $> npm install react-component-visbility --save
 
 and you're off to the races.
 
-I think you forgot something
----
+## I think you forgot something
 
 I very well might have! Hit up the [issue tracker](https://github.com/Pomax/react-component-visibility/issues) and we can discuss that.
 
