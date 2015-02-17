@@ -37,9 +37,10 @@ module.exports = {
     // but let's be fair: if we're opacity: 0 or
     // visibility: hidden, we're not visible at all.
     if(visible) {
+      var d0 = (gcs.getPropertyValue("display") === "none");
       var o0 = (gcs.getPropertyValue("opacity") === 0);
       var v0 = (gcs.getPropertyValue("visibility") === "hidden");
-      visible = visible && !o0 && !v0;
+      visible = visible && !d0 && !o0 && !v0;
     }
 
     // at this point, if our visibility is not what we expected,
