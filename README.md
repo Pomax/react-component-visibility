@@ -35,6 +35,15 @@ event handling:
   Call as `this.disableVisbilityHandling()` to turn off event listening for
   this component.
 
+- `componentVisibilityChanged()` (optional)
+
+  This function, if found, gets called automatically after binding a visibility
+  change in the component's state, so that you can trigger custom logic. No
+  argument comes into this function, since the `this.state.visible` value will
+  already reflect the currect value, and the old value was simply `!visible`.
+
+### Rate limiting the scroll handling
+
 By default, the mixin does rate limiting to prevent event saturation (onscroll
 refires very fast), set such that when a scroll event is handled, it won't
 listen for and act on new events until 25 milliseconds later. You can change
