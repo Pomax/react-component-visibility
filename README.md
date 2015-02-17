@@ -1,6 +1,8 @@
 # react-component-visibility
 
-## A mixin for determining whether a component is visible to the user or not.
+A mixin for determining whether a component is visible to the user or not.
+
+## What is this?
 
 This mixin is for running React components in the browser (it has a hard
 dependency on `window` and `document`), listening to `scroll` and `resize`
