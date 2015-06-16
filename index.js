@@ -1,9 +1,7 @@
 (function() {
-
   var RATE_LIMIT = 25;
 
   var ComponentVisibilityMixin = {
-
     setComponentVisbilityRateLimit: function(milliseconds) {
       RATE_LIMIT = milliseconds;
     },
@@ -44,12 +42,15 @@
           visible = horizontallyVisible && verticallyVisible;
 
       // but let's be fair: if we're opacity: 0 or
-      // visibility: hidden, we're not visible at all.
+      // visibility: hidden, or browser window is minimized we're not visible at all.
       if(visible) {
-        var d0 = (gcs.getPropertyValue("display") === "none");
-        var o0 = (gcs.getPropertyValue("opacity") === 0);
-        var v0 = (gcs.getPropertyValue("visibility") === "hidden");
-        visible = visible && !d0 && !o0 && !v0;
+        var isDocHidden = document.hidden;
+        var isElementNotDisplayed = (gcs.getPropertyValue("display") === "none");
+        var elementHasZeroOpacity = (gcs.getPropertyValue("opacity") === 0);
+        var isElementHidden = (gcs.getPropertyValue("visibility") === "hidden");
+        visible = visible && !(
+          isDocHidden || isElementNotDisplayed || elementHasZeroOpacity || isElementHidden
+        );
       }
 
       // at this point, if our visibility is not what we expected,
@@ -89,6 +90,7 @@
           }
         }.bind(this), RATE_LIMIT);
       }.bind(this);
+      document.addEventListener("visibilitychange", this._rcv_fn);
       document.addEventListener("scroll", this._rcv_fn);
       window.addEventListener("resize", this._rcv_fn);
       if (checkNow) { this._rcv_fn(); }
