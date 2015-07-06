@@ -14,8 +14,8 @@ In addition to the event handler, a state change is triggered for a value
 called `visible`, so you usually don't even need to implement your own
 `componentVisibilityChanged` handler, you can simply rely on the fact that
 **if** the component becomes visible, or goes from visible to no longer
-visible (based on scroll or resizing), `render()`, and subsequent
-`componentDidUpdate` will get triggered.
+visible (based on scroll, resize, or window minimize), `render()`, and
+subsequent `componentDidUpdate` will get triggered.
 
 Nice and easy.
 
@@ -24,8 +24,8 @@ Nice and easy.
 
 The mixin takes care of registering and dropping event listeners for scroll
 and window resizing. However, because some times you only need "trigger once,
-then stop listening", there are two functions you can call to optimize the
-event handling:
+then stop listening", there are two functions you can call if you need more
+control than the mixin provides:
 
 - `enableVisbilityHandling([checkNow])` (built in)
 
@@ -36,6 +36,11 @@ event handling:
 
   Call as `this.disableVisbilityHandling()` to turn off event listening for
   this component.
+
+And then for convenience, so you don't need to mess with visibility change
+checks in `componentDidUpdate()`, there is an optional function that your
+component can implement, which will then be used to notify it of any
+changes to the component visibility:
 
 - `componentVisibilityChanged()` (optional)
 
