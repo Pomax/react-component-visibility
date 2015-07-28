@@ -75,6 +75,8 @@
      * immediately check whether this element is already visible or not.
      */
     enableVisbilityHandling: function(checkNow) {
+      var domnode = this.getDOMNode();
+
       this._rcv_fn = function() {
         if(this._rcv_lock) {
           this._rcv_schedule = true;
@@ -90,9 +92,17 @@
           }
         }.bind(this), RATE_LIMIT);
       }.bind(this);
+
+      /* Adding scroll listeners to all element's parents */
+      while (domnode.nodeName !== 'BODY' && domnode.parentElement) {
+        domnode = domnode.parentElement;
+        domnode.addEventListener("scroll", this._rcv_fn);
+      }
+      /* Adding listeners to page events */
       document.addEventListener("visibilitychange", this._rcv_fn);
       document.addEventListener("scroll", this._rcv_fn);
       window.addEventListener("resize", this._rcv_fn);
+
       if (checkNow) { this._rcv_fn(); }
     },
 
