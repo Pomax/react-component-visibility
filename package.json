@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Pomax/react-component-visibility/issues"
   },
-  "homepage": "https://github.com/Pomax/react-component-visibility"
+  "homepage": "https://github.com/Pomax/react-component-visibility",
+  "peerDependencies": {
+    "react": "^0.13"
+  }
 }

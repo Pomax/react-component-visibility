@@ -18,6 +18,9 @@
     "visibility",
     "mixin"
   ],
+  "dependencies": {
+    "react": "~0.13"
+  },
   "license": "MIT",
   "ignore": [
     "**/.*",
