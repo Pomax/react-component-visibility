@@ -1,4 +1,14 @@
 (function() {
+  if (typeof window === "undefined") {
+    return console.error("This environment lacks 'window' support.");
+  }
+
+  if (typeof document === "undefined") {
+    return console.error("This environment lacks 'document' support.");
+  }
+
+  var React = window.React || require('react');
+
   var RATE_LIMIT = 25;
 
   var ComponentVisibilityMixin = {
@@ -25,7 +35,7 @@
      * on opacity:0 or visibility:hidden.
      */
     checkComponentVisibility: function() {
-      var domnode = this.getDOMNode(),
+      var domnode = this._dom_node,
           gcs = getComputedStyle(domnode, false),
           dims = domnode.getBoundingClientRect(),
           h = window.innerHeight,
@@ -75,7 +85,10 @@
      * immediately check whether this element is already visible or not.
      */
     enableVisbilityHandling: function(checkNow) {
-      var domnode = this.getDOMNode();
+      if (!this._dom_node) {
+        this._dom_node = React.findDOMNode(this);
+      }
+      var domnode = this._dom_node;
 
       this._rcv_fn = function() {
         if(this._rcv_lock) {
