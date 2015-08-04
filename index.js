@@ -26,7 +26,7 @@
      */
     checkComponentVisibility: function() {
       var domnode = this.getDOMNode(),
-          gcs = getComputedStyle(domnode, false),
+          gcs = window.getComputedStyle(domnode, false),
           dims = domnode.getBoundingClientRect(),
           h = window.innerHeight,
           w = window.innerWidth,
@@ -82,7 +82,7 @@
         }
         this._rcv_lock = true;
         this.checkComponentVisibility();
-        setTimeout(function() {
+        this._rcv_timeout = setTimeout(function() {
           this._rcv_lock = false;
           if (this._rcv_schedule) {
             this._rcv_schedule = false;
@@ -103,7 +103,9 @@
      * static assets on first-time-in-view-ness (that's a word, right?).
      */
     disableVisbilityHandling: function() {
+      clearTimeout(this._rcv_timeout);
       if (this._rcv_fn) {
+        document.removeEventListener("visibilitychange", this._rcv_fn);
         document.removeEventListener("scroll", this._rcv_fn);
         window.removeEventListener("resize", this._rcv_fn);
         this._rcv_fn = false;
