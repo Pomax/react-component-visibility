@@ -127,6 +127,14 @@
      */
     disableVisbilityHandling: function() {
       if (this._rcv_fn) {
+        var domnode = this._dom_node;
+
+        while (domnode.nodeName !== 'BODY' && domnode.parentElement) {
+          domnode = domnode.parentElement;
+          domnode.removeEventListener("scroll", this._rcv_fn);
+        }
+
+        document.removeEventListener("visibilitychange", this._rcv_fn);
         document.removeEventListener("scroll", this._rcv_fn);
         window.removeEventListener("resize", this._rcv_fn);
         this._rcv_fn = false;
