@@ -1,13 +1,5 @@
 (function() {
-  if (typeof window === "undefined") {
-    return console.error("This environment lacks 'window' support.");
-  }
-
-  if (typeof document === "undefined") {
-    return console.error("This environment lacks 'document' support.");
-  }
-
-  var React = window.React || require('react');
+  var React = typeof window !== 'undefined' && window.React || require('react');
 
   var RATE_LIMIT = 25;
 
@@ -85,6 +77,14 @@
      * immediately check whether this element is already visible or not.
      */
     enableVisbilityHandling: function(checkNow) {
+      if (typeof window === "undefined") {
+        return console.error("This environment lacks 'window' support.");
+      }
+
+      if (typeof document === "undefined") {
+        return console.error("This environment lacks 'document' support.");
+      }
+
       if (!this._dom_node) {
         this._dom_node = React.findDOMNode(this);
       }
