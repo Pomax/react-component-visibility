@@ -1,13 +1,5 @@
 (function() {
-  if (typeof window === "undefined") {
-    return console.error("This environment lacks 'window' support.");
-  }
-
-  if (typeof document === "undefined") {
-    return console.error("This environment lacks 'document' support.");
-  }
-
-  var React = window.React || require('react');
+  var React = typeof window !== 'undefined' && window.React || require('react');
 
   var RATE_LIMIT = 25;
 
@@ -36,7 +28,7 @@
      */
     checkComponentVisibility: function() {
       var domnode = this._dom_node,
-          gcs = getComputedStyle(domnode, false),
+          gcs = window.getComputedStyle(domnode, false),
           dims = domnode.getBoundingClientRect(),
           h = window.innerHeight,
           w = window.innerWidth,
@@ -85,6 +77,14 @@
      * immediately check whether this element is already visible or not.
      */
     enableVisbilityHandling: function(checkNow) {
+      if (typeof window === "undefined") {
+        return console.error("This environment lacks 'window' support.");
+      }
+
+      if (typeof document === "undefined") {
+        return console.error("This environment lacks 'document' support.");
+      }
+
       if (!this._dom_node) {
         this._dom_node = React.findDOMNode(this);
       }
@@ -97,7 +97,7 @@
         }
         this._rcv_lock = true;
         this.checkComponentVisibility();
-        setTimeout(function() {
+        this._rcv_timeout = setTimeout(function() {
           this._rcv_lock = false;
           if (this._rcv_schedule) {
             this._rcv_schedule = false;
@@ -126,6 +126,7 @@
      * static assets on first-time-in-view-ness (that's a word, right?).
      */
     disableVisbilityHandling: function() {
+      clearTimeout(this._rcv_timeout);
       if (this._rcv_fn) {
         var domnode = this._dom_node;
 
