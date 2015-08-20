@@ -41,7 +41,11 @@
           rightVisible = 0 < dims.right && dims.right < w,
           horizontallyVisible = leftVisible || rightVisible,
           // we're only visible if both of those are true.
-          visible = horizontallyVisible && verticallyVisible;
+          visible = horizontallyVisible && verticallyVisible,
+          // lets determine element's position relative to viewport center (regardless of visibility)
+          topHalf = (h / 2) > dims.top + ((dims.bottom - dims.top) / 2),
+          leftHalf = (w / 2) > dims.left + ((dims.right - dims.left) / 2),
+          visibilityChanged, vPositionChanged, hPositionChanged;
 
       // but let's be fair: if we're opacity: 0 or
       // visibility: hidden, or browser window is minimized we're not visible at all.
@@ -50,23 +54,32 @@
         var isElementNotDisplayed = (gcs.getPropertyValue("display") === "none");
         var elementHasZeroOpacity = (gcs.getPropertyValue("opacity") === 0);
         var isElementHidden = (gcs.getPropertyValue("visibility") === "hidden");
-        visible = visible && !(
-          isDocHidden || isElementNotDisplayed || elementHasZeroOpacity || isElementHidden
-        );
+        visible = visible && !(isDocHidden || isElementNotDisplayed || elementHasZeroOpacity || isElementHidden);
       }
+
+      //Track what changed so the callback can can react appropriately
+      visibilityChanged = visible !== this.state.visible;
+      vPositionChanged = topHalf !== this.state.topHalf;
+      hPositionChanged = leftHalf !== this.state.leftHalf;
 
       // at this point, if our visibility is not what we expected,
       // update our state so that we can trigger whatever needs to
       // happen.
-      if(visible !== this.state.visible) {
+      if (visibilityChanged  || vPositionChanged || hPositionChanged) {
         // set State first:
-        this.setState({ visible: visible },
-        // then notify the component the value was changed:
-        function() {
-          if (this.componentVisibilityChanged) {
-            this.componentVisibilityChanged();
-          }
-        });
+        this.setState({
+            visible: visible,
+            topHalf: topHalf,
+            bottomHalf: !topHalf,
+            leftHalf: leftHalf,
+            rightHalf: !leftHalf
+          },
+          // then notify the component the value was changed:
+          function () {
+            if (this.componentVisibilityChanged) {
+              this.componentVisibilityChanged(visibilityChanged, vPositionChanged, hPositionChanged);
+            }
+          });
       }
     },
 
