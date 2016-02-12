@@ -1,5 +1,6 @@
 (function() {
   var React = typeof window !== 'undefined' && window.React || require('react');
+  var ReactDOM = require('react-dom');
 
   var RATE_LIMIT = 25;
 
@@ -86,7 +87,7 @@
       }
 
       if (!this._dom_node) {
-        this._dom_node = React.findDOMNode(this);
+        this._dom_node = ReactDOM.findDOMNode(this);
       }
       var domnode = this._dom_node;
 
