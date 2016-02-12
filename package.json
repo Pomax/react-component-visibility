@@ -11,7 +11,8 @@
     "React",
     "visible",
     "visibility",
-    "mixin"
+    "mixin",
+    "react-component"
   ],
   "author": "Pomax",
   "license": "MIT",
@@ -25,9 +26,11 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "jsdom": "^3.1.2",
-    "react": "^0.13.0"
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   },
   "peerDependencies": {
-    "react": "^0.13"
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   }
 }
