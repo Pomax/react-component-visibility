@@ -149,7 +149,7 @@ module.exports = MyComponent;
 Simply use `npm`:
 
 ```
-$> npm install react-component-visbility --save
+$> npm install react-component-visibility --save
 ```
 
 and you're off to the races.
