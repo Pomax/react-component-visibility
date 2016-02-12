@@ -2,6 +2,10 @@
 
 A mixin for determining whether a component is visible to the user or not.
 
+Versions below v1.0.0 use the React namespace, v1.0.0 and later use ReactDOM
+instead, which means if you're using an older version of React, you may
+need to handpick the version you want to use.
+
 ## What is this?
 
 This mixin is for running React components in the browser (it has a hard
