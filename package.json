@@ -11,7 +11,8 @@
     "React",
     "visible",
     "visibility",
-    "mixin"
+    "mixin",
+    "react-component"
   ],
   "author": "Pomax",
   "license": "MIT",
