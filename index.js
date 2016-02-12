@@ -77,7 +77,7 @@
      * listening on, or with argument "true" to turn listening on and
      * immediately check whether this element is already visible or not.
      */
-    enableVisbilityHandling: function(checkNow) {
+    enableVisibilityHandling: function(checkNow) {
       if (typeof window === "undefined") {
         return console.error("This environment lacks 'window' support.");
       }
@@ -126,7 +126,7 @@
      * and you only really need to do something once, like loading in
      * static assets on first-time-in-view-ness (that's a word, right?).
      */
-    disableVisbilityHandling: function() {
+    disableVisibilityHandling: function() {
       clearTimeout(this._rcv_timeout);
       if (this._rcv_fn) {
         var domnode = this._dom_node;
