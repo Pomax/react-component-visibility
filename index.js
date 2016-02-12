@@ -1,6 +1,6 @@
 (function() {
-  var React = typeof window !== 'undefined' && window.React || require('react');
-  var ReactDOM = require('react-dom');
+  var React = (typeof window !== 'undefined') ? window.React : require('react');
+  var ReactDOM = (typeof window !== 'undefined') ? window.ReactDOM : require('react-dom');
 
   var RATE_LIMIT = 25;
 
