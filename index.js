@@ -5,7 +5,7 @@
   var RATE_LIMIT = 25;
 
   var ComponentVisibilityMixin = {
-    setComponentVisbilityRateLimit: function(milliseconds) {
+    setComponentVisibilityRateLimit: function(milliseconds) {
       RATE_LIMIT = milliseconds;
     },
 
@@ -14,11 +14,11 @@
     },
 
     componentDidMount: function() {
-      this.enableVisbilityHandling(true);
+      this.enableVisibilityHandling(true);
     },
 
     componentWillUnmount: function() {
-      this.disableVisbilityHandling();
+      this.disableVisibilityHandling();
     },
 
     /**
