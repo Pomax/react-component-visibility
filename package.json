@@ -1,6 +1,6 @@
 {
   "name": "react-component-visibility",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A mixin for determining whether a component is visible to the user or not.",
   "main": "index.js",
   "repository": {
