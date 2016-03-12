@@ -31,14 +31,14 @@ and window resizing. However, because some times you only need "trigger once,
 then stop listening", there are two functions you can call if you need more
 control than the mixin provides:
 
-- `enableVisbilityHandling([checkNow])` (built in)
+- `enableVisibilityHandling([checkNow])` (built in)
 
-  Call as `this.enableVisbilityHandling()`, with an optional `true` as argument
+  Call as `this.enableVisibilityHandling()`, with an optional `true` as argument
   to both enable visibiilty handling and immediately do a visibiity check.
 
-- `disableVisbilityHandling()` (built in)
+- `disableVisibilityHandling()` (built in)
 
-  Call as `this.disableVisbilityHandling()` to turn off event listening for
+  Call as `this.disableVisibilityHandling()` to turn off event listening for
   this component.
 
 And then for convenience, so you don't need to mess with visibility change
@@ -66,7 +66,7 @@ you want the interval to be instead:
 ...
 componentDidMount: function() {
   ...
-  this.setComponentVisbilityRateLimit(ms);
+  this.setComponentVisibilityRateLimit(ms);
   ...
 },
 ...
@@ -79,7 +79,7 @@ Using the mixin is pretty straight forward.
 ### In the browser:
 
 ```
-<script src="react-component-visbility/index.js"></script>
+<script src="react-component-visibility/index.js"></script>
 ...
 <script type="text/jsx">
 var MyComponent = React.createClass({
@@ -101,7 +101,7 @@ var MyComponent = React.createClass({
 
 ### In the browser, AMD style:
 
-Bind `react-component-visbility/index.js` in your require config,
+Bind `react-component-visibility/index.js` in your require config,
 and then simply require it in like everything else:
 
 ```
