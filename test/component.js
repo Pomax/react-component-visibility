@@ -2,9 +2,11 @@ var assert = require('chai').assert;
 var jsdom = require('jsdom');
 var mixin = require('../');
 var React;
+var ReactDOM;
 
 before(function () {
     React = require('react');
+    ReactDOM = require('react-dom');
 
     global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
     global.window = document.parentWindow;
@@ -41,7 +43,7 @@ describe('react-component-visibility', function () {
                 return React.createElement('div', {}, 'hello');
             }
         });
-        element = React.render(React.createElement(component), document.body);
+        element = ReactDOM.render(React.createElement(component), document.body);
     });
 
     function testEvent(type) {
@@ -54,7 +56,7 @@ describe('react-component-visibility', function () {
             })
 
             it('should not trigger checkComponentVisibility if disabled', function (done) {
-                element.disableVisbilityHandling();
+                element.disableVisibilityHandling();
                 element.checkComponentVisibility = function () {
                     done(new Error('should not run'));
                 };
@@ -65,7 +67,7 @@ describe('react-component-visibility', function () {
             it('should not trigger checkComponentVisibility if unmounted', function (done) {
                 // fire event to trigger rate limit
                 fireEvent(type);
-                React.unmountComponentAtNode(document.body);
+                ReactDOM.unmountComponentAtNode(document.body);
                 element.checkComponentVisibility = function () {
                     done(new Error('should not run'));
                 };
