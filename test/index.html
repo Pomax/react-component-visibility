@@ -7,6 +7,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
     <script src="../index.js"></script>
+    <style>
+      .wrapper {
+        width: 5000px;
+      }
+      .wrapper div {
+        float: left;
+        width: 500px;
+      }
+    </style>
    </head>
    <body>
     <div id="test"></div>
@@ -14,8 +23,16 @@
     <script type="text/jsx">
       var Element = React.createClass({
         mixins: [ ComponentVisibilityMixin ],
-        componentVisibilityChanged: function(evT) {
-          console.log(this.props.idx+" became "+(this.state.visible ? '':'in')+"visible");
+        componentVisibilityChanged: function(visibilityChanged, vPositionChanged, hPositionChanged) {
+          if (visibilityChanged) {
+              console.log(this.props.idx+" became "+(this.state.visible ? '':'in')+"visible");
+          }
+          if (vPositionChanged && this.state.visible) {
+              console.log(this.props.idx+" is now in the "+(this.state.topHalf ? "top " : "bottom ")+"half");
+          }
+          if (hPositionChanged && this.state.visible) {
+              console.log(this.props.idx+" is now in the "+(this.state.leftHalf ? "left " : "right ")+"half");
+          }
         },
         render: function() {
          return <div><h1>{this.props.idx}</h1>Salami pig ham hock, meatloaf kevin shankle cow alcatra t-bone brisket andouille venison pancetta beef ribs. Tongue flank doner porchetta picanha, andouille biltong hamburger. Cow bresaola andouille, chuck sausage filet mignon picanha. Picanha pastrami salami brisket, fatback venison tenderloin doner. Biltong hamburger bacon kevin pastrami cow strip steak meatloaf tail chicken jowl pork boudin landjaeger ground round.</div>;
@@ -24,10 +41,10 @@
 
       var App = React.createClass({
         render: function() {
-          var divs = "abcdefghijklmnopqrstuvwxyz".split('').map(function(e,idx) {
+          var divs = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdef".split('').map(function(e,idx) {
             return <Element idx={idx} key={idx}/>;
           });
-          return <div>{divs}</div>;
+          return <div className="wrapper">{divs}</div>;
         }
       });
 

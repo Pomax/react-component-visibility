@@ -14,11 +14,11 @@ events to check whether these have made components visible to the user. If
 so, magic happens and the component's `componentVisibilityChanged` function
 to notify the component that a visibility change occurred.
 
-In addition to the event handler, a state change is triggered for a value
-called `visible`, so you usually don't even need to implement your own
+In addition to the event handler, a state change is triggered for values
+called `visible`, `topHalf`, `bottomHalf`, `leftHalf`, `rightHalf`, so you usually don't even need to implement your own
 `componentVisibilityChanged` handler, you can simply rely on the fact that
-**if** the component becomes visible, or goes from visible to no longer
-visible (based on scroll, resize, or window minimize), `render()`, and
+**if** the component becomes visible, goes from visible to no longer
+visible, or moves relative to the center of the viewport (based on scroll, resize, or window minimize), `render()`, and
 subsequent `componentDidUpdate` will get triggered.
 
 Nice and easy.
@@ -46,7 +46,7 @@ checks in `componentDidUpdate()`, there is an optional function that your
 component can implement, which will then be used to notify it of any
 changes to the component visibility:
 
-- `componentVisibilityChanged()` (optional)
+- `componentVisibilityChanged(visibilityChanged, verticalPositionChanged, horizontalPositionChanged)` (optional)
 
   This function, if you add it to your component yourself, gets called
   automatically after binding a visibility change in the component's state,
