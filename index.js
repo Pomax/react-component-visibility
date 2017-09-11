@@ -34,12 +34,12 @@
           h = window.innerHeight,
           w = window.innerWidth,
           // are we vertically visible?
-          topVisible = 0 < dims.top && dims.top < h,
-          bottomVisible = 0 < dims.bottom && dims.bottom < h,
+          topVisible = 0 <= dims.top && dims.top <= h,
+          bottomVisible = 0 <= dims.bottom && dims.bottom <= h,
           verticallyVisible = topVisible || bottomVisible,
           // also, are we horizontally visible?
-          leftVisible = 0 < dims.left && dims.left < w,
-          rightVisible = 0 < dims.right && dims.right < w,
+          leftVisible = 0 <= dims.left && dims.left <= w,
+          rightVisible = 0 <= dims.right && dims.right <= w,
           horizontallyVisible = leftVisible || rightVisible,
           // we're only visible if both of those are true.
           visible = horizontallyVisible && verticallyVisible;
